@@ -2,11 +2,15 @@ const express = require('express');
 const app = express();
 const { config } = require('./config');
 const moviesApi = require('./routes/movies.js');
+const userMoviesApi = require('./routes/UserMovies');
+const authApi = require('./routes/auth');
 const { logErrors, errorHandler, wrapErrors } = require('./utils/middleware/errorHandlers')
 const notFoundHandler = require('./utils/middleware/notFoundHandler');
 app.use(express.json());
 
 moviesApi(app);
+userMoviesApi(app);
+authApi(app);
 app.use(notFoundHandler); //Captura Error 404
 //Errores
 app.use(logErrors);
